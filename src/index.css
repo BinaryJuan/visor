@@ -1,13 +1,205 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  overflow-y: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+p {
+  margin: 0;
+  user-select: none;
+}
+
+label {
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+select {
+  font-size: 1rem;
+  padding: 5px;
+  border: 3px solid #b07deb;
+  border-radius: 5px;
+  color: rgb(53, 53, 53);
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+option {
+  cursor: pointer;
+}
+
+.boardTab {
+  width: 10%;
+  position: fixed;
+  height: 100vh;
+  background-color: #3c0977;
+  box-shadow: 0 8px 32px 0 rgb(35, 6, 68);
+  min-width: 230px;
+}
+
+.menu {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.menuTitleImg {
+  width: 70px;
+  height: auto;
+  transition: all 1s ease;
+}
+
+.menuTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: all 1s ease;
+  margin-bottom: 20px;
+}
+
+.title {
+  position: absolute;
+  opacity: 0;
+  color: #a867f1;
+  transition: all 1s ease;
+  user-select: none;
+}
+
+.menuTitle:hover .menuTitleImg {
+  transform: translateX(-50%) scale(1.08);
+  transition: all 1s ease;
+}
+
+.menuTitle:hover .title {
+  opacity: 1;
+  transform: translateX(70%);
+  transition: all 1s ease;
+}
+
+#board {
+  width: 100%;
+  height: 100vh;
+  background-color: #e8e8e8;
+}
+
+hr {
+  width: 70%;
+  color: rgba(133, 133, 133, 0.418);
+}
+
+canvas {
+  cursor: url('../public/pen.svg') 0 -5, auto;
+  z-index: -1;
+}
+
+.cursorOutline {
+  position: absolute;
+  border: 2px solid black;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.menuControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+  margin: 15px 0;
+}
+
+.resetButton {
+  width: 70%;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #9157d4;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  margin-top: 20px;
+}
+
+.resetButton:hover {
+  background-color: #a867f1;
+  transition: all 0.5s ease;
+}
+
+.saveButton {
+  width: 70%;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6b2bb4;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  margin-top: 20px;
+}
+
+.saveButton:hover {
+  background-color: #7d3cc7;
+  transition: all 0.5s ease;
+}
+
+.menuControl p {
+  font-size: 1.2rem;
+  color: #a867f1;
+  border: #b07deb 1px solid;
+  padding: 2px 4px;
+  border-radius: .2rem;
+}
+
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+  border: 1px solid #a867f1;
+  border-radius: 50%;
+  pointer-events: none;
+  display: none;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio]:checked + label {
+  border: 2px solid #a867f1;
+  background-color: #a867f1;
+}
+
+.toolsContainer {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+  margin-top: 5px;
+}
+
+.toolLabel {
+  border: 2px solid #b07deb;
+  padding: 8px;
+  border-radius: .2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolLabel:hover {
+  border: 2px solid #a867f1;
+  background-color: #a867f1;
+  transition: all 0.2s ease;
 }
