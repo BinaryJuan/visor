@@ -28,7 +28,7 @@ const App = () => {
     document.addEventListener('mousemove', e => {
       if (cursorHTML) {
         cursorHTML.style.left = (e.clientX - (size / 2) - 1) + 'px'
-        cursorHTML.style.top = (e.clientY - (size / 2) - 5) + 'px'
+        cursorHTML.style.top = (e.clientY - (size / 2) - 1) + 'px'
       }
     })
   }
