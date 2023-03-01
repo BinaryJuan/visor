@@ -92,7 +92,6 @@ hr {
 }
 
 canvas {
-  cursor: url('../public/pen.svg') 0 -5, auto;
   z-index: -1;
 }
 
@@ -167,7 +166,6 @@ canvas {
   border: 1px solid #a867f1;
   border-radius: 50%;
   pointer-events: none;
-  display: none;
 }
 
 input[type=radio] {

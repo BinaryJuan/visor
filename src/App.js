@@ -17,6 +17,7 @@ const App = () => {
     canvas.current.width = window.innerWidth
     canvas.current.height = window.innerHeight
     ctx.current = canvas.current.getContext('2d')
+    canvas.current.style.cursor = 'none'
 
     window.addEventListener('resize', () => {
       canvas.current.width = window.innerWidth
@@ -95,14 +96,11 @@ const App = () => {
         if (value === 'eraser') {
           setColor('#e8e8e8')
           ctx.current.strokeStyle = '#e8e8e8'
-          canvas.current.style.cursor = 'none'
-          cursorHTML.style.display = 'block'
         } else {
-          cursorHTML.style.display = 'none'
           const previousColor = document.getElementById('color').value
           setColor(previousColor)
           ctx.current.strokeStyle = previousColor
-          canvas.current.style.cursor = 'url(./pen.svg) 0 0, auto'
+          canvas.current.style.cursor = 'none'
         }
         break
       case 'size':
@@ -110,11 +108,6 @@ const App = () => {
         ctx.current.lineWidth = value
         cursorHTML.style.width = value + 'px'
         cursorHTML.style.height = value + 'px'
-        if (tool === 'eraser') {
-          cursorHTML.style.display = 'block'
-        } else {
-          cursorHTML.style.display = 'none'
-        }
         break
       case 'color':
         if (tool !== 'eraser') {
@@ -151,13 +144,21 @@ const App = () => {
   }
 
   const saveImage = () => {
-    const image = canvas.current.toDataURL("image/png").replace("image/png", "image/octet-stream")
+    const imageData = ctx.current.getImageData(0, 0, canvas.current.width, canvas.current.height)
+    const pixels = imageData.data
+    for (let i = 0; i < pixels.length; i += 4) {
+      const r = pixels[i]
+      const g = pixels[i + 1]
+      const b = pixels[i + 2]
+      if (r === 232 && g === 232 && b === 232) {
+        pixels[i + 3] = 0
+      }
+    }
+    ctx.current.putImageData(imageData, 0, 0)
     const link = document.createElement('a')
-    link.download = 'myDrawing.png'
-    link.href = image
-    document.body.appendChild(link)
+    link.download = 'mySketch.png'
+    link.href = canvas.current.toDataURL('image/png')
     link.click()
-    document.body.removeChild(link)
   }
 
   return (
